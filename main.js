@@ -1,9 +1,9 @@
 (function() {
     // Load the script
-    var script = document.createElement("SCRIPT");
+    var script = document.createElement('SCRIPT');
     script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';
     script.type = 'text/javascript';
-    document.getElementsByTagName("head")[0].appendChild(script);
+    document.getElementsByTagName('head')[0].appendChild(script);
 
     // Poll for jQuery to come into existance
     var checkReady = function(callback) {
@@ -31,7 +31,7 @@
 //         var domElement = element[element.length - 1];
 //         $(domElement).css('background','rgba(255,100,100,0.3)');
 //         $(domElement).mouseout(function() {
-//             console.log("out");
+//             console.log('out');
 //             $(domElement).css('background','');
 //         console.log('hello');
 //         });
@@ -44,7 +44,7 @@
 
 
 that=$('html');
-$("*").on("mouseenter", function() { 
+$('*').on('mouseenter', function() { 
     hoverElem = this;
     // console.log(this);
     // console.log(this.length);
@@ -52,7 +52,7 @@ $("*").on("mouseenter", function() {
     $(this).css('background','rgba(100,100,255,0.25)');
     that=this;
 });
-$("*").on("mouseleave", function() { 
+$('*').on('mouseleave', function() { 
     hoverElem = this;
     $(this).css('background',''); 
 });
@@ -87,7 +87,7 @@ $(window).click(function(e) {
 
     }
     rootString = rootString.substring(0,rootString.length-3);
-    send_request = confirm(rootString);
+    send_request = confirm('Press OK to get notified whenever this content changes');
     if (send_request) {
         $.ajax({
             type: 'POST',

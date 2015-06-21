@@ -3,7 +3,7 @@
           
 from sys import platform as OPERATING_SYSTEM
 from bs4 import BeautifulSoup
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask import make_response, current_app, abort, jsonify
 from datetime import timedelta
 from functools import update_wrapper
@@ -187,7 +187,7 @@ app = Flask(__name__)
 @app.route('/')
 @crossdomain(origin='*')
 def index():
-  return "Hello, World!"
+  return app.send_static_file('index.html')
 
 @app.route('/add', methods=['POST'])
 @crossdomain(origin='*')
@@ -231,6 +231,6 @@ def start():
   # task.scan_for_changes(request.args['url'])
   return 'ok'
 
-
+# app = Flask(__name__, static_url_path='')
 if __name__ == '__main__':
   app.run(debug=True)
