@@ -21,6 +21,45 @@
     });
 
 
+
+// setInterval(function() {
+    
+//     var element = $(':hover');
+//     console.log('el',element.length,element);
+//     if(element.length)
+//     {
+//         var domElement = element[element.length - 1];
+//         $(domElement).css('background','rgba(255,100,100,0.3)');
+//         $(domElement).mouseout(function() {
+//             console.log("out");
+//             $(domElement).css('background','');
+//         console.log('hello');
+//         });
+        
+//     }
+// console.log('huh?')
+// }, 100);
+
+
+
+
+that=$('html');
+$("*").on("mouseenter", function() { 
+    hoverElem = this;
+    // console.log(this);
+    // console.log(this.length);
+    $(that).css('background',''); 
+    $(this).css('background','rgba(100,100,255,0.25)');
+    that=this;
+});
+$("*").on("mouseleave", function() { 
+    hoverElem = this;
+    $(this).css('background',''); 
+});
+
+
+
+
 $(window).click(function(e) {
     var x = e.clientX, y = e.clientY,
         elementMouseIsOver = document.elementFromPoint(x, y);
@@ -64,5 +103,6 @@ $(window).click(function(e) {
     }
 });
 
-
 })();
+
+

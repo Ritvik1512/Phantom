@@ -7,9 +7,10 @@ from flask import Flask, request
 from flask import make_response, current_app, abort, jsonify
 from datetime import timedelta
 from functools import update_wrapper
-import os, hashlib, cPickle, requests, smtplib
+import os, hashlib, cPickle, requests, smtplib, threading
+import task
 
-SITES_LIST = 'sites.ptm'
+SITES_LIST = 'sites'
 
 path=''
 if OPERATING_SYSTEM == "linux" or OPERATING_SYSTEM == "linux2":
@@ -106,6 +107,18 @@ def save_data(page_url, changes_to_monitor):
   with open(page_url_md5, 'wb') as f:
     cPickle.dump(content_data, f, cPickle.HIGHEST_PROTOCOL)
 
+  if not os.path.isfile(SITES_LIST):
+    websites = {}
+  else: 
+    with open(SITES_LIST, 'r') as f:
+      websites = cPickle.load(f)
+
+  websites[page_url] = True
+
+  with open(SITES_LIST, 'wb') as f:
+    cPickle.dump(websites, f, cPickle.HIGHEST_PROTOCOL)
+
+
 def get_saved_data(page_url):
   page_url_md5 = hashlib.sha224(page_url).hexdigest()
   with open(page_url_md5, 'r') as f:
@@ -141,20 +154,6 @@ def compare_data(page_url):
   if not len(changes):
     return 'No Changes'
   return changes
-
-def send_mail(data):
-  fromaddr = 'piedpiper.angelhack@gmail.com'
-  toaddrs  = 'mavidser@gmail.com'
-  msg = data
-  username = 'piedpiper.angelhack@gmail.com'
-  password = 'redmiones'
-  server = smtplib.SMTP('smtp.gmail.com:587')
-  server.ehlo()
-  server.starttls()
-  server.login(username,password)
-  server.sendmail(fromaddr, toaddrs, msg)
-  server.quit()
-
 
 def main(page_url,changes_to_monitor):
   # page_url = 'http://localhost:8000/'
@@ -196,11 +195,12 @@ def add():
   # return 'hello'
   # if not request.form or (not 'url' in request.form or not 'data' in request.form):
     # abort(400)
-  print 'form',request.form
+  # print 'form',request.form
   page_url = request.form['url']
-  print page_url
+  # print page_url
   changes_to_monitor = [request.form['data']]
   save_data(page_url,changes_to_monitor)
+  threading.Timer(5, task.scan_for_changes, [page_url]).start()
   print 'Data Saved. You will be notified if website changes.'
   return 'Data Saved. You will be notified if website changes.'
   
@@ -216,12 +216,21 @@ def check():
     compared_data = compare_data(page_url)
     if compared_data!='No Changes':
       save_data(page_url,changes_to_monitor)
-      print compared_data
+      print page_url,'Changes:'
       print jsonify(compared_data)
       return jsonify(compared_data)
     else:
-      print 'No Change'
+      print page_url,'No Change'
       return 'No Change'
+
+@app.route('/start')
+@crossdomain(origin='*')
+def start():
+  print request.args['url']
+  threading.Timer(5, task.scan_for_changes, [request.args['url']]).start()
+  # task.scan_for_changes(request.args['url'])
+  return 'ok'
+
 
 if __name__ == '__main__':
   app.run(debug=True)
