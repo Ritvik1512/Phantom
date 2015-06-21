@@ -1,0 +1,117 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js" lang="">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- Site Title -->
+    <title>Phantom</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Google Font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="static/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- Plugins CSS -->
+    <link href="static/assets/plugins/jpreloader/css/jpreloader.css" rel="stylesheet" type="text/css">
+    <link href="static/assets/plugins/icons-mind/style.css" rel="stylesheet" type="text/css">
+    <link href="static/assets/plugins/animate-css/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="static/assets/plugins/magnificPopup/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="static/assets/plugins/flexSlider/flexslider.css" rel="stylesheet" type="text/css">
+
+    <!-- Main CSS -->
+    <link href="static/assets/css/main.css" rel="stylesheet" type="text/css">
+
+    <!-- Color CSS -->
+    <link href="static/assets/css/colors/green.css" rel="stylesheet" type="text/css">
+    <link href="static/assets/css/switch-style.css" rel="stylesheet" type="text/css">
+
+    <link href='http://fonts.googleapis.com/css?family=Dosis:400,600' rel='stylesheet' type='text/css'>
+
+    <!-- Modernizr JS for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 8]>
+    <script src="static/assets/plugins/modernizr.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" data-offset="66">
+    <!--[if lt IE 7]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <header id="home" class="hero">
+        <div class="pattern-overlay"></div>
+        <div class="hero-body">
+            <div class="hero-text text-center">
+                <h1 class="small">
+                    Phantom <sup><span class="beta">&alpha;</span></sup> <span class="blinker"></span>
+                </h1>
+                <h2>Monitors and notifies you about changes on the webpages you want</h2>
+                <h5 style="margin-top:50px;">Drag the bookmarklet to your bookmarks bar to get started</h5>
+                <div class="page-scroll">
+                    <a href="javascript:(function(){(function(){var script=document.createElement('SCRIPT');script.src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js';script.type='text/javascript';document.getElementsByTagName('head')[0].appendChild(script);var checkReady=function(callback){if(window.jQuery){callback(jQuery);}else{window.setTimeout(function(){checkReady(callback);},100);}};checkReady(function($){});that=$('html');$('*').on('mouseenter',function(){hoverElem=this;$(that).css('background','');$(this).css('background','rgba(100,100,255,0.25)');that=this;});$('*').on('mouseleave',function(){hoverElem=this;$(this).css('background','');});$(window).click(function(e){var x=e.clientX,y=e.clientY,elementMouseIsOver=document.elementFromPoint(x,y);var temp=elementMouseIsOver;rootString='';while(true){var elementString=temp.tagName.toLowerCase();if(elementString!='html'&&elementString!='body')if(temp['id'])elementString=elementString+'#'+temp['id'];else for(var i=0;i<temp.classList.length;i++)elementString=elementString+'.'+temp.classList[i];rootString=elementString+' > '+rootString;temp=temp.parentElement;if(!temp)break;}rootString=rootString.substring(0,rootString.length-3);send_request=confirm('Press OK to get notified whenever this content changes');if(send_request){$.ajax({type:'POST',url:'http://127.0.0.1:5000/add',data:{'url':window.location.href,'data':rootString},success:function(msg){alert('Phantom will alert you when the webpage changes');}});}});})();})();" class="btn btn-lg btn-custom">
+                        Phantom
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="list-inline text-center">
+<!--                     <li>
+                        <a title="Facebook" class="icon" href="http://www.facebook.com" target="_blank"> <i class="fa fa-facebook fa-2x"></i> </a>
+                    </li>
+                    <li>
+                        <a title="Twitter" class="icon" href="https://twitter.com/" target="_blank"> <i class="fa fa-twitter fa-2x"></i> </a>
+                    </li>
+                    <li>
+                        <a title="LinkedIn" class="icon" href="http://www.linkedin.com/in/" target="_blank"> <i class="fa fa-linkedin fa-2x"></i> </a>
+                    </li>
+ -->                    <li>
+                        <a title="Github" class="icon" href="https://github.com/piedpiper15/angelhack15" target="_blank"> <i class="fa fa-github fa-2x"></i> </a>
+                    </li>
+<!--                     <li>
+                        <a title="Email" class="icon" href="mailto:" target="_blank" data-toggle="tooltip"> <i class="fa fa-envelope fa-2x"></i></a>
+                    </li>
+ -->                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Plugins JS -->
+    <script src="static/assets/plugins/jquery.min.js"></script>
+    <script src="static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="static/assets/plugins/jpreloader/js/jpreloader.min.js"></script>
+    <script src="static/assets/plugins/detectmobilebrowser/detectmobilebrowser.js"></script>
+    <script src="static/assets/plugins/debouncer/debouncer.js"></script>
+    <script src="static/assets/plugins/easing/jquery.easing.min.js"></script>
+    <script src="static/assets/plugins/sticky/jquery.sticky.js"></script>
+    <script src="static/assets/plugins/inview/jquery.inview.min.js"></script>
+    <script src="static/assets/plugins/matchHeight/jquery.matchHeight-min.js"></script>
+    <script src="static/assets/plugins/magnificPopup/jquery.magnific-popup.min.js"></script>
+    <script src="static/assets/plugins/flexSlider/jquery.flexslider-min.js"></script>
+    <script src="static/assets/plugins/countTo/jquery.countTo.js"></script>
+    <!-- Main JS -->
+    <script src="static/assets/js/main.js"></script>
+    <!-- Animation JS (Optional) -->
+    <script src="static/assets/js/animation.js"></script>
+    <script src="static/assets/js/switch-style.js"></script>
+</body>
+
+</html>
